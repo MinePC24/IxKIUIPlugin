@@ -25,9 +25,9 @@ declare(strict_types=1);
  */
 class ilAIChatPlugin extends ilRepositoryObjectPlugin
 {
-    const PLUGIN_ID = 'xaic';
+    const PLUGIN_ID = 'xaid';
 
-    const PLUGIN_NAME = 'AIChat';
+    const PLUGIN_NAME = 'AIChat_dev';
     protected function uninstallCustom(): void
     {
     }

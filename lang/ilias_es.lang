@@ -1,5 +1,5 @@
-obj_xaic#:#AI Chat
-objs_xaic#:#Objetos AIChat
+obj_xaic#:#AI Chat_dev
+objs_xaic#:#Objetos AIChat_dev
 xaic_new#:#Nuevo AIChat
 xaic_add#:#Añadir AIChat
 xaic_delete#:#Borrar AIChat

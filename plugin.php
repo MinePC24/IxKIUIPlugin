@@ -19,7 +19,7 @@
  */
 
 
-$id = 'xaic';
+$id = 'xaid';
 
 $version = '10.0.0';
 

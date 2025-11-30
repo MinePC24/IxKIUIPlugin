@@ -1,5 +1,5 @@
-obj_xaic#:#KI-Chat
-objs_xaic#:#KI-Chat-Objekte
+obj_xaic#:#KI-Chat_dev
+objs_xaic#:#KI-Chat-Objekte_dev
 xaic_new#:#Neuer KI-Chat
 xaic_add#:#Add KI-Chat
 xaic_delete#:#Löschen KI-Chat
