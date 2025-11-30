@@ -43,6 +43,7 @@ class ilObjAIChatGUI extends ilObjectPluginGUI
 
     public function __construct($a_ref_id = 0, $a_id_type = self::REPOSITORY_NODE_ID, $a_parent_node_id = 0)
     {
+        // Dependency Injection Container
         global $DIC;
 
         $this->factory = $DIC->ui()->factory();
@@ -81,6 +82,11 @@ class ilObjAIChatGUI extends ilObjectPluginGUI
     protected function setTabs(): void
     {
         $this->tabs->addTab("content", $this->plugin->txt("object_content"), $this->ctrl->getLinkTarget($this, "content"));
+        // Check if the user is allowed to write
+        if ($this->checkPermissionBool("write")) {
+            // Set another test-tab
+            $this->tabs->addTab("test", $this->plugin->txt("object_test"), $this->ctrl->getLinkTarget($this, "test"));
+        }
 
         if ($this->checkPermissionBool("write")) {
             $this->tabs->addTab("settings", $this->plugin->txt("object_settings"), $this->ctrl->getLinkTarget($this, "settings"));
@@ -123,6 +129,20 @@ class ilObjAIChatGUI extends ilObjectPluginGUI
         $apiUrl = $this->ctrl->getLinkTargetByClass("ilObjAIChatGUI", "apiCall");
 
         $this->tpl->setContent("<div id='root' apiurl='$apiUrl'></div>");
+    }
+
+    /**
+     * Sets the content for the test tab
+     * @return void
+     */
+    private function test(): void
+    {
+        global $DIC;
+        $this->tabs->activateTab("test");
+
+        $message = $DIC->ui()->factory()->messageBox()->info("Hello World!");
+
+        $this->tpl->setContent($DIC->ui()->renderer()->render($message));
     }
 
     /**

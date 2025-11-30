@@ -11,6 +11,7 @@ xaic_visible#:#AIChats visible
 xaic_write#:#Present and edit AIChat
 objs_xaic_duplicate#:#Duplicate AI Chat Object
 object_content#:#Content
+object_test#:#Test
 object_settings#:#Settings
 object_settings_basic#:#Basic Settings
 object_settings_advanced#:#Advanced Settings

@@ -11,6 +11,7 @@ xaic_visible#:#AIChats sichtbar
 xaic_write#:#KI-Chat präsentieren und bearbeiten
 objs_xaic_duplicate#:#KI-Chat-Objekt duplizieren
 object_content#:#Inhalt
+object_test#:#Test
 object_settings#:#Einstellungen
 object_settings_basic#:#Grundeinstellungen
 object_settings_advanced#:#Erweiterte Einstellungen
