@@ -229,6 +229,17 @@ if ($db->tableExists('xaic_config')) {
                     $new_config['openai_streaming'] = $config['streaming_enabled'];
                 }
                 break;
+            case 'rag':
+                $new_config['service_to_use'] = 'rag';
+
+                if(isset($config['llm_url'])) {
+                    $new_config['rag_endpoint'] = $config['llm_url'];
+                }
+
+                if(isset($config['llm_model'])) {
+                    $new_config['rag_model'] = $config['llm_model'];
+                }
+                break;
             case 'custom':
                 $new_config['service_to_use'] = 'ollama';
 
@@ -291,7 +302,11 @@ if ($db->tableExists('xaic_objects')) {
             $new_object['openai_model'] = ["text", $object['model']];
             $new_object['openai_api_key'] = ["text", $object['api_key']];
             $new_object['openai_streaming'] = ["integer", $object['streaming']];
-        } else {
+        } else if ($object['provider'] == 'rag') {
+            $new_object['rag_endpoint'] = ["text", $object['url']];
+            $new_object['rag_model'] = ["text", $object['model']];
+
+        }else {
             $new_object['ollama_model'] = ["text", $object['model']];
         }
 

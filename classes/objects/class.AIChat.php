@@ -24,6 +24,7 @@ namespace objects;
 use ai\GWDG;
 use ai\LLM;
 use ai\OpenAI;
+use ai\RAG;
 use ai\Ollama;
 use DateTime;
 use platform\AIChatConfig;
@@ -45,6 +46,7 @@ class AIChat
     private string $openai_model = "";
     private string $openai_api_key = "";
     private bool $openai_streaming = false;
+    private string $rag_model = "";
     private string $ollama_model = "";
     private string $service_to_use = "";
     private string $gwdg_model = "";
@@ -233,6 +235,20 @@ class AIChat
         $this->ollama_model = $ollama_model;
     }
 
+    public function getRagModel(bool $strict = false): string
+    {
+        if ($this->rag_model != "" || $strict) {
+            return $this->rag_model;
+        }
+
+        return AIChatConfig::get("rag_model");
+    }
+
+    public function setRagModel(string $rag_model): void
+    {
+        $this->rag_model = $rag_model;
+    }
+
     /**
      * @throws AIChatException
      */
@@ -337,6 +353,7 @@ class AIChat
             $this->setOpenaiApiKey((string) $result[0]["openai_api_key"]);
             $this->setOpenaiStreaming((bool) $result[0]["openai_streaming"]);
             $this->setOllamaModel((string) $result[0]["ollama_model"]);
+            $this->setRagModel((string) $result[0]["rag_model"]);
             $this->setServiceToUse($result[0]["service_to_use"]);
             $this->setGwdgModel((string) $result[0]["gwdg_model"]);
             $this->setGwdgStreaming((bool) $result[0]["gwdg_streaming"]);
@@ -365,6 +382,7 @@ class AIChat
             "openai_api_key" => $this->openai_api_key,
             "openai_streaming" => (int) $this->openai_streaming,
             "ollama_model" => $this->ollama_model,
+            "rag_model" => $this->rag_model,
             "service_to_use" => $this->service_to_use,
             "gwdg_model" => $this->gwdg_model,
             "gwdg_streaming" => (int) $this->gwdg_streaming,
@@ -445,6 +463,17 @@ class AIChat
                     if (in_array($model, $models)) {
                         $this->llm = new Ollama($model);
                         $this->llm->setEndpoint(AIChatConfig::get("ollama_endpoint"));
+                        $this->llm->setMaxMemoryMessages($this->getMaxMemoryMessages());
+                        $this->llm->setPrompt($this->getPrompt());
+                    }
+                    break;
+                case "rag":
+                    $models = $this->getRAGModelsList();
+                    $model = $this->getRagModel();
+
+                    if (in_array($model, $models)) {
+                        $this->llm = new RAG($model);
+                        $this->llm->setEndpoint(AIChatConfig::get("rag_endpoint"));
                         $this->llm->setMaxMemoryMessages($this->getMaxMemoryMessages());
                         $this->llm->setPrompt($this->getPrompt());
                     }
