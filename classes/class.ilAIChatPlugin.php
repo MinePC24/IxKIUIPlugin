@@ -27,7 +27,7 @@ class ilAIChatPlugin extends ilRepositoryObjectPlugin
 {
     const PLUGIN_ID = 'xaid';
 
-    const PLUGIN_NAME = 'AIChat_dev';
+    const PLUGIN_NAME = 'IxKIUIPlugin';
     protected function uninstallCustom(): void
     {
     }
