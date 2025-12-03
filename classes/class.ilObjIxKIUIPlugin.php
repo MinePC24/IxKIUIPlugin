@@ -26,7 +26,7 @@ use objects\AIChat;
  * Class ilObjAIChat
  * @authors Jesús Copado, Daniel Cazalla, Saúl Díaz, Juan Aguilar <info@surlabs.es>
  */
-class ilObjAIChat extends ilObjectPlugin
+class ilObjIxKIUIPlugin extends ilObjectPlugin
 {
     private AIChat $ai_chat;
 

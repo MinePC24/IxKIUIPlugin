@@ -35,7 +35,7 @@ use ai\OpenAI;
  * @ilCtrl_isCalledBy ilObjAIChatGUI: ilRepositoryGUI, ilObjPluginDispatchGUI, ilAdministrationGUI
  * @ilCtrl_Calls      ilObjAIChatGUI: ilObjectCopyGUI, ilPermissionGUI, ilInfoScreenGUI, ilCommonActionDispatcherGUI
  */
-class ilObjAIChatGUI extends ilObjectPluginGUI
+class ilObjIxKIUIPluginGUI extends ilObjectPluginGUI
 {
     private Factory $factory;
     private Renderer $renderer;
@@ -109,7 +109,7 @@ class ilObjAIChatGUI extends ilObjectPluginGUI
         global $DIC;
         $this->tabs->activateTab("content");
 
-        if(ilObjAIChatAccess::_isOffline($this->obj_id)){
+        if(ilObjIxKIUIPluginAccess::_isOffline($this->obj_id)){
             $this->tpl->setContent($DIC->ui()->renderer()->render($DIC->ui()->factory()->messageBox()->failure($this->plugin->txt("object_offline_info"))));
             return;
         }

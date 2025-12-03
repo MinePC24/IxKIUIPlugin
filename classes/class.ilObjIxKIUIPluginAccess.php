@@ -26,7 +26,7 @@ use platform\AIChatException;
  * Class ilObjAIChatAccess
  * @authors Jesús Copado, Daniel Cazalla, Saúl Díaz, Juan Aguilar <info@surlabs.es>
  */
-class ilObjAIChatAccess extends ilObjectPluginAccess
+class ilObjIxKIUIPluginAccess extends ilObjectPluginAccess
 {
 
     public function _checkAccess(string $cmd, string $permission, int $ref_id, int $obj_id, ?int $user_id = null): bool

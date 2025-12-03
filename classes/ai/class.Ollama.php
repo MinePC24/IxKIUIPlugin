@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace ai;
 
-use ilObjAIChatGUI;
+use ilObjIxKIUIPluginGUI;
 use objects\Chat;
 use platform\AIChatException;
 
@@ -59,14 +59,14 @@ class Ollama extends LLM
         curl_close($curlSession);
 
         if ($errNo) {
-            ilObjAIChatGUI::sendApiResponse(array("error" => $DIC->language()->txt("rep_robj_xaic_error_http") . ": " . $errMsg), 500);
+            ilObjIxKIUIPluginGUI::sendApiResponse(array("error" => $DIC->language()->txt("rep_robj_xaic_error_http") . ": " . $errMsg), 500);
         }
 
         if ($httpcode != 200) {
             if ($httpcode === 401) {
-                ilObjAIChatGUI::sendApiResponse(array("error" => $DIC->language()->txt("rep_robj_xaic_error_apikey")), 401);
+                ilObjIxKIUIPluginGUI::sendApiResponse(array("error" => $DIC->language()->txt("rep_robj_xaic_error_apikey")), 401);
             } else {
-                ilObjAIChatGUI::sendApiResponse(array("error" => $DIC->language()->txt("rep_robj_xaic_error_http")), $httpcode);
+                ilObjIxKIUIPluginGUI::sendApiResponse(array("error" => $DIC->language()->txt("rep_robj_xaic_error_http")), $httpcode);
             }
         }
 

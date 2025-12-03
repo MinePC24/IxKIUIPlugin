@@ -31,7 +31,7 @@ use ai\OpenAI;
  * @authors Jesús Copado, Daniel Cazalla, Saúl Díaz, Juan Aguilar <info@surlabs.es>
  * @ilCtrl_IsCalledBy  ilAIChatConfigGUI: ilObjComponentSettingsGUI
  */
-class ilAIChatConfigGUI extends ilPluginConfigGUI
+class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
 {
     protected Factory $factory;
     protected Renderer $renderer;

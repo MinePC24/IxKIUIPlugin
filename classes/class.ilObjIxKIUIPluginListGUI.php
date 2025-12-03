@@ -23,7 +23,7 @@ declare(strict_types=1);
  * Class ilObjAIChatListGUI
  * @authors Jesús Copado, Daniel Cazalla, Saúl Díaz, Juan Aguilar <info@surlabs.es>
  */
-class ilObjAIChatListGUI extends ilObjectPluginListGUI
+class ilObjIxKIUIPluginListGUI extends ilObjectPluginListGUI
 {
     public function getGuiClass(): string
     {
@@ -59,7 +59,7 @@ class ilObjAIChatListGUI extends ilObjectPluginListGUI
 
         $props = parent::getCustomProperties($a_prop);
 
-        if (ilObjAIChatAccess::_isOffline($this->obj_id)) {
+        if (ilObjIxKIUIPluginAccess::_isOffline($this->obj_id)) {
             $props[] = array(
                 'alert' => true,
                 'newline' => true,
@@ -79,7 +79,7 @@ class ilObjAIChatListGUI extends ilObjectPluginListGUI
 
         $props = parent::getAlertProperties();
 
-        if (ilObjAIChatAccess::_isOffline($this->obj_id)) {
+        if (ilObjIxKIUIPluginAccess::_isOffline($this->obj_id)) {
             $props[] = array(
                 'alert' => true,
                 'newline' => true,
