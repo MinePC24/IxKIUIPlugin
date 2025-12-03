@@ -22,8 +22,8 @@ declare(strict_types=1);
 use ILIAS\UI\Factory;
 use ILIAS\UI\Component\Input\Field\Group;
 use ILIAS\UI\Renderer;
-use platform\AIChatConfig;
-use platform\AIChatException;
+use platform\IxKIUIPluginConfig;
+use platform\IxKIUIPluginException;
 use ai\OpenAI;
 
 /**
@@ -59,7 +59,7 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
             case "configureOpenAI":
             case "configureOllama":
             case "configureGWDG":
-                AIChatConfig::load();
+                IxKIUIPluginConfig::load();
                 $this->initTabs();
                 $this->control->setParameterByClass('ilAIChatConfigGUI', 'cmd', $cmd);
                 $form_action = $this->control->getLinkTargetByClass("ilAIChatConfigGUI", $cmd);
@@ -117,7 +117,7 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     private function buildForm(string $cmd): array
     {
@@ -134,17 +134,17 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     private function buildGeneralSection(): array {
-        $available_services = AIChatConfig::get("available_services");
+        $available_services = IxKIUIPluginConfig::get("available_services");
 
         $openai_service = $this->factory->input()->field()->checkbox(
             "OpenAI",
         )->withValue(isset($available_services["openai"]) && $available_services["openai"] == "1")->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) use (&$available_services) {
                 $available_services["openai"] = $v;
-                AIChatConfig::set('available_services', $available_services);
+                IxKIUIPluginConfig::set('available_services', $available_services);
             }
         ));
 
@@ -153,7 +153,7 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
         )->withValue(isset($available_services["ollama"]) && $available_services["ollama"] == "1")->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) use (&$available_services) {
                 $available_services["ollama"] = $v;
-                AIChatConfig::set('available_services', $available_services);
+                IxKIUIPluginConfig::set('available_services', $available_services);
             }
         ));
 
@@ -162,43 +162,43 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
         )->withValue(isset($available_services["gwdg"]) && $available_services["gwdg"] == "1")->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) use (&$available_services) {
                 $available_services["gwdg"] = $v;
-                AIChatConfig::set('available_services', $available_services);
+                IxKIUIPluginConfig::set('available_services', $available_services);
             }
         ));
 
         $prompt = $this->factory->input()->field()->textarea(
             $this->plugin_object->txt("config_prompt_label"),
             $this->plugin_object->txt("config_prompt_info")
-        )->withValue(AIChatConfig::get("prompt"))->withAdditionalTransformation($this->refinery->custom()->transformation(
+        )->withValue(IxKIUIPluginConfig::get("prompt"))->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) {
-                AIChatConfig::set('prompt', $v);
+                IxKIUIPluginConfig::set('prompt', $v);
             }
         ))->withRequired(true);
 
         $characters_limit = $this->factory->input()->field()->numeric(
             $this->plugin_object->txt("config_characters_limit_label"),
             $this->plugin_object->txt("config_characters_limit_info")
-        )->withValue(AIChatConfig::get("characters_limit"))->withAdditionalTransformation($this->refinery->custom()->transformation(
+        )->withValue(IxKIUIPluginConfig::get("characters_limit"))->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) {
-                AIChatConfig::set('characters_limit', $v);
+                IxKIUIPluginConfig::set('characters_limit', $v);
             }
         ));
 
         $max_memory_messages = $this->factory->input()->field()->numeric(
             $this->plugin_object->txt("config_max_memory_messages_label"),
             $this->plugin_object->txt("config_max_memory_messages_info")
-        )->withValue(AIChatConfig::get("max_memory_messages"))->withAdditionalTransformation($this->refinery->custom()->transformation(
+        )->withValue(IxKIUIPluginConfig::get("max_memory_messages"))->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) {
-                AIChatConfig::set('max_memory_messages', $v);
+                IxKIUIPluginConfig::set('max_memory_messages', $v);
             }
         ));
 
         $disclaimer = $this->factory->input()->field()->textarea(
             $this->plugin_object->txt("config_disclaimer_label"),
             $this->plugin_object->txt("config_disclaimer_info")
-        )->withValue(AIChatConfig::get("disclaimer"))->withAdditionalTransformation($this->refinery->custom()->transformation(
+        )->withValue(IxKIUIPluginConfig::get("disclaimer"))->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) {
-                AIChatConfig::set('disclaimer', $v);
+                IxKIUIPluginConfig::set('disclaimer', $v);
             }
         ))->withRequired(true);
 
@@ -226,27 +226,27 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
 
 
 
-        )->withValue(AIChatConfig::get("openai_model"))->withAdditionalTransformation($this->refinery->custom()->transformation(
+        )->withValue(IxKIUIPluginConfig::get("openai_model"))->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) {
-                AIChatConfig::set('openai_model', $v);
+                IxKIUIPluginConfig::set('openai_model', $v);
             }
         ))->withRequired(true);
 
         $api_key = $this->factory->input()->field()->text(
             $this->plugin_object->txt("config_openai_key_label"),
             $this->plugin_object->txt("config_openai_key_info")
-        )->withValue(AIChatConfig::get("openai_api_key"))->withAdditionalTransformation($this->refinery->custom()->transformation(
+        )->withValue(IxKIUIPluginConfig::get("openai_api_key"))->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) {
-                AIChatConfig::set('openai_api_key', $v);
+                IxKIUIPluginConfig::set('openai_api_key', $v);
             }
         ))->withRequired(true);
 
         $streaming = $this->factory->input()->field()->checkbox(
             $this->plugin_object->txt("config_openai_stream_label"),
             $this->plugin_object->txt("config_openai_stream_info")
-        )->withValue(AIChatConfig::get("openai_streaming") == "1")->withAdditionalTransformation($this->refinery->custom()->transformation(
+        )->withValue(IxKIUIPluginConfig::get("openai_streaming") == "1")->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) {
-                AIChatConfig::set('openai_streaming', $v);
+                IxKIUIPluginConfig::set('openai_streaming', $v);
             }
 
         ));
@@ -261,26 +261,26 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     private function buildOllamaSection(): array {
         $inputs = [];
 
-        $llama_endpoint = AIChatConfig::get("ollama_endpoint");
+        $llama_endpoint = IxKIUIPluginConfig::get("ollama_endpoint");
 
         $inputs[] = $this->factory->input()->field()->text(
             $this->plugin_object->txt("config_ollama_endpoint_label"),
             $this->plugin_object->txt("config_ollama_endpoint_info")
         )->withValue($llama_endpoint)->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) {
-                AIChatConfig::set('ollama_endpoint', $v);
+                IxKIUIPluginConfig::set('ollama_endpoint', $v);
             }
         ))->withRequired(true);
 
         if (!empty($llama_endpoint)) {
             $models = $this->getOLlamaModels($llama_endpoint);
 
-            $values = AIChatConfig::get("ollama_models");
+            $values = IxKIUIPluginConfig::get("ollama_models");
 
             if (empty($values)) {
                 $values = [];
@@ -300,7 +300,7 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
                             $models_to_save[$model] = $models[$model];
                         }
 
-                        AIChatConfig::set('ollama_models', $models_to_save);
+                        IxKIUIPluginConfig::set('ollama_models', $models_to_save);
                     }
                 ))->withRequired(true);
             } else {
@@ -314,15 +314,15 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     private function buildGWDGSection(): array {
         $inputs = [];
 
-        if (!empty(AIChatConfig::get("gwdg_api_key"))) {
-            $models = $this->getGWDGModels(AIChatConfig::get("gwdg_api_key"));
+        if (!empty(IxKIUIPluginConfig::get("gwdg_api_key"))) {
+            $models = $this->getGWDGModels(IxKIUIPluginConfig::get("gwdg_api_key"));
 
-            $values = AIChatConfig::get("gwdg_models");
+            $values = IxKIUIPluginConfig::get("gwdg_models");
 
             if (empty($values)) {
                 $values = [];
@@ -342,7 +342,7 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
                             $models_to_save[$model] = $models[$model];
                         }
 
-                        AIChatConfig::set('gwdg_models', $models_to_save);
+                        IxKIUIPluginConfig::set('gwdg_models', $models_to_save);
                     }
                 ))->withRequired(true);
             } else {
@@ -353,18 +353,18 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
         $inputs[] = $this->factory->input()->field()->text(
             $this->plugin_object->txt("config_gwdg_key_label"),
             $this->plugin_object->txt("config_gwdg_key_info")
-        )->withValue(AIChatConfig::get("gwdg_api_key"))->withAdditionalTransformation($this->refinery->custom()->transformation(
+        )->withValue(IxKIUIPluginConfig::get("gwdg_api_key"))->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) {
-                AIChatConfig::set('gwdg_api_key', $v);
+                IxKIUIPluginConfig::set('gwdg_api_key', $v);
             }
         ))->withRequired(true);
 
         $inputs[] = $this->factory->input()->field()->checkbox(
             $this->plugin_object->txt("config_gwdg_stream_label"),
             $this->plugin_object->txt("config_gwdg_stream_info")
-        )->withValue(AIChatConfig::get("gwdg_streaming") == "1")->withAdditionalTransformation($this->refinery->custom()->transformation(
+        )->withValue(IxKIUIPluginConfig::get("gwdg_streaming") == "1")->withAdditionalTransformation($this->refinery->custom()->transformation(
             function ($v) {
-                AIChatConfig::set('gwdg_streaming', $v);
+                IxKIUIPluginConfig::set('gwdg_streaming', $v);
             }
         ));
 
@@ -393,7 +393,7 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
 
     public function save(): void
     {
-        AIChatConfig::save();
+        IxKIUIPluginConfig::save();
 
         $this->tpl->setOnScreenMessage("success", $this->plugin_object->txt('config_msg_success'));
     }

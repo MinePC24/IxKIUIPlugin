@@ -26,7 +26,7 @@ namespace platform;
  * Class AIChatConfig
  * @authors Jesús Copado, Daniel Cazalla, Saúl Díaz, Juan Aguilar <info@surlabs.es>
  */
-class AIChatConfig
+class IxKIUIPluginConfig
 {
     private static array $config = [];
     private static array $updated = [];
@@ -34,11 +34,11 @@ class AIChatConfig
     /**
      * Load the plugin configuration
      * @return void
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public static function load(): void
     {
-        $config = (new AIChatDatabase)->select('xaic_config');
+        $config = (new IxKIUIPluginDatabase)->select('xaic_config');
 
         foreach ($config as $row) {
             if (isset($row['value']) && $row['value'] !== '') {
@@ -75,7 +75,7 @@ class AIChatConfig
      * Gets the plugin configuration value for a given key
      * @param string $key
      * @return mixed|string
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public static function get(string $key)
     {
@@ -86,11 +86,11 @@ class AIChatConfig
      * Gets the plugin configuration value for a given key from the database
      * @param string $key
      * @return mixed|string
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public static function getFromDB(string $key)
     {
-        $config = (new AIChatDatabase)->select('xaic_config', array(
+        $config = (new IxKIUIPluginDatabase)->select('xaic_config', array(
             'name' => $key
         ));
 
@@ -138,10 +138,10 @@ class AIChatConfig
                     }
 
                     try {
-                        (new AIChatDatabase)->insertOnDuplicatedKey('xaic_config', $data);
+                        (new IxKIUIPluginDatabase)->insertOnDuplicatedKey('xaic_config', $data);
 
                         self::$updated[$key] = false;
-                    } catch (AIChatException $e) {
+                    } catch (IxKIUIPluginException $e) {
                         return $e->getMessage();
                     }
                 }

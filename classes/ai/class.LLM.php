@@ -22,7 +22,7 @@ declare(strict_types=1);
 namespace ai;
 
 use objects\Chat;
-use platform\AIChatException;
+use platform\IxKIUIPluginException;
 
 /**
  * Class LLM
@@ -55,7 +55,7 @@ abstract class LLM
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     protected function chatToMessagesArray(Chat $chat): array
     {

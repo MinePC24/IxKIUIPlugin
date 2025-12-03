@@ -5,7 +5,7 @@ namespace ai;
 
 use ilObjIxKIUIPluginGUI;
 use objects\Chat;
-use platform\AIChatException;
+use platform\IxKIUIPluginException;
 
 class GWDG extends LLM
 {
@@ -39,7 +39,7 @@ class GWDG extends LLM
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function sendChat(Chat $chat)
     {

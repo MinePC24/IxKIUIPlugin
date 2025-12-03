@@ -23,8 +23,8 @@ namespace objects;
 
 use DateTime;
 use Exception;
-use platform\AIChatDatabase;
-use platform\AIChatException;
+use platform\IxKIUIPluginDatabase;
+use platform\IxKIUIPluginException;
 
 /**
  * Class Message
@@ -119,12 +119,12 @@ class Message
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      * @throws Exception
      */
     public function loadFromDB(): void
     {
-        $database = new AIChatDatabase();
+        $database = new IxKIUIPluginDatabase();
 
         $result = $database->select("xaic_messages", ["id" => $this->getId()]);
 
@@ -137,11 +137,11 @@ class Message
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function save(): void
     {
-        $database = new AIChatDatabase();
+        $database = new IxKIUIPluginDatabase();
 
         $data = [
             "chat_id" => $this->getChatId(),
@@ -164,11 +164,11 @@ class Message
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function delete(): void
     {
-        $database = new AIChatDatabase();
+        $database = new IxKIUIPluginDatabase();
 
         $database->delete("xaic_messages", ["id" => $this->getId()]);
     }

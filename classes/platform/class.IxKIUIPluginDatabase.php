@@ -28,7 +28,7 @@ use ilDBInterface;
  * Class AIChatDatabase
  * @authors Jesús Copado, Daniel Cazalla, Saúl Díaz, Juan Aguilar <info@surlabs.es>
  */
-class AIChatDatabase
+class IxKIUIPluginDatabase
 {
     const ALLOWED_TABLES = [
         'xaic_config',
@@ -54,12 +54,12 @@ class AIChatDatabase
      * @param string $table
      * @param array $data
      * @return void
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function insert(string $table, array $data): void
     {
         if (!$this->validateTableName($table)) {
-            throw new AIChatException("Invalid table name: " . $table);
+            throw new IxKIUIPluginException("Invalid table name: " . $table);
         }
 
         try {
@@ -67,7 +67,7 @@ class AIChatDatabase
                     return $this->db->quote($value);
                 }, array_values($data))) . ")");
         } catch (Exception $e) {
-            throw new AIChatException($e->getMessage());
+            throw new IxKIUIPluginException($e->getMessage());
         }
     }
 
@@ -79,12 +79,12 @@ class AIChatDatabase
      * @param string $table
      * @param array $data
      * @return void
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function insertOnDuplicatedKey(string $table, array $data): void
     {
         if (!$this->validateTableName($table)) {
-            throw new AIChatException("Invalid table name: " . $table);
+            throw new IxKIUIPluginException("Invalid table name: " . $table);
         }
 
         try {
@@ -96,7 +96,7 @@ class AIChatDatabase
                     return $this->db->quote($value);
                 }, array_values($data)))));
         } catch (Exception $e) {
-            throw new AIChatException($e->getMessage());
+            throw new IxKIUIPluginException($e->getMessage());
         }
     }
 
@@ -109,12 +109,12 @@ class AIChatDatabase
      * @param array $data
      * @param array $where
      * @return void
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function update(string $table, array $data, array $where): void
     {
         if (!$this->validateTableName($table)) {
-            throw new AIChatException("Invalid table name: " . $table);
+            throw new IxKIUIPluginException("Invalid table name: " . $table);
         }
 
         try {
@@ -128,7 +128,7 @@ class AIChatDatabase
                     return $this->db->quote($value);
                 }, array_values($where)))));
         } catch (Exception $e) {
-            throw new AIChatException($e->getMessage());
+            throw new IxKIUIPluginException($e->getMessage());
         }
     }
 
@@ -140,12 +140,12 @@ class AIChatDatabase
      * @param string $table
      * @param array $where
      * @return void
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function delete(string $table, array $where): void
     {
         if (!$this->validateTableName($table)) {
-            throw new AIChatException("Invalid table name: " . $table);
+            throw new IxKIUIPluginException("Invalid table name: " . $table);
         }
 
         try {
@@ -155,7 +155,7 @@ class AIChatDatabase
                     return $this->db->quote($value);
                 }, array_values($where)))));
         } catch (Exception $e) {
-            throw new AIChatException($e->getMessage());
+            throw new IxKIUIPluginException($e->getMessage());
         }
     }
 
@@ -169,12 +169,12 @@ class AIChatDatabase
      * @param array|null $columns
      * @param string|null $extra
      * @return array
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function select(string $table, ?array $where = null, ?array $columns = null, ?string $extra = ""): array
     {
         if (!$this->validateTableName($table)) {
-            throw new AIChatException("Invalid table name: " . $table);
+            throw new IxKIUIPluginException("Invalid table name: " . $table);
         }
 
         try {
@@ -203,7 +203,7 @@ class AIChatDatabase
 
             return $rows;
         } catch (Exception $e) {
-            throw new AIChatException($e->getMessage());
+            throw new IxKIUIPluginException($e->getMessage());
         }
     }
 
@@ -214,14 +214,14 @@ class AIChatDatabase
      *
      * @param string $table
      * @return int
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function nextId(string $table): int
     {
         try {
             return (int) $this->db->nextId($table);
         } catch (Exception $e) {
-            throw new AIChatException($e->getMessage());
+            throw new IxKIUIPluginException($e->getMessage());
         }
     }
 

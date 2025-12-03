@@ -5,7 +5,7 @@ namespace ai;
 
 use ilObjIxKIUIPluginGUI;
 use objects\Chat;
-use platform\AIChatException;
+use platform\IxKIUIPluginException;
 
 class Ollama extends LLM
 {
@@ -23,7 +23,7 @@ class Ollama extends LLM
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function sendChat(Chat $chat)
     {

@@ -19,8 +19,8 @@ declare(strict_types=1);
  *
  */
 
-use objects\AIChat;
-use platform\AIChatException;
+use objects\IxKIUIPlugin;
+use platform\IxKIUIPluginException;
 
 /**
  * Class ilObjAIChatAccess
@@ -57,7 +57,7 @@ class ilObjIxKIUIPluginAccess extends ilObjectPluginAccess
      */
     public static function _isOffline($a_obj_id): bool
     {
-        $aichat = new AIChat((int) $a_obj_id);
+        $aichat = new IxKIUIPlugin((int) $a_obj_id);
         return !$aichat->isOnline();
     }
 

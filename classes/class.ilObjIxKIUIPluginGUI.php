@@ -22,11 +22,11 @@ declare(strict_types=1);
 use ILIAS\UI\Component\Input\Group;
 use ILIAS\UI\Factory;
 use ILIAS\UI\Renderer;
-use objects\AIChat;
+use objects\IxKIUIPlugin;
 use objects\Chat;
 use objects\Message;
-use platform\AIChatConfig;
-use platform\AIChatException;
+use platform\IxKIUIPluginConfig;
+use platform\IxKIUIPluginException;
 use ai\OpenAI;
 
 /**
@@ -146,7 +146,7 @@ class ilObjIxKIUIPluginGUI extends ilObjectPluginGUI
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      * @throws ilCtrlException
      */
     private function settings(): void
@@ -160,7 +160,7 @@ class ilObjIxKIUIPluginGUI extends ilObjectPluginGUI
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     private function renderSettingsForm(string $form_action): string
     {
@@ -188,12 +188,12 @@ class ilObjIxKIUIPluginGUI extends ilObjectPluginGUI
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     private function buildSettingsForm(): array
     {
         /**
-         * @var $aiChat AIChat
+         * @var $aiChat IxKIUIPlugin
          */
         $aiChat = $this->object->getAIChat();
 
@@ -240,7 +240,7 @@ class ilObjIxKIUIPluginGUI extends ilObjectPluginGUI
 
         $apiControls = [];
 
-        $available_services = AIChatConfig::get("available_services");
+        $available_services = IxKIUIPluginConfig::get("available_services");
 
         $service_to_use = $this->factory->input()->field()->radio(
             $this->plugin->txt("config_service_label"),
@@ -454,7 +454,7 @@ class ilObjIxKIUIPluginGUI extends ilObjectPluginGUI
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function apiCall()
     {
@@ -469,14 +469,14 @@ class ilObjIxKIUIPluginGUI extends ilObjectPluginGUI
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     private function processGetApiCall($data)
     {
         switch ($data["action"]) {
             case "config":
                 /**
-                 * @var $aiChat AIChat
+                 * @var $aiChat IxKIUIPlugin
                  */
                 $aiChat = $this->object->getAIChat();
 
@@ -521,7 +521,7 @@ class ilObjIxKIUIPluginGUI extends ilObjectPluginGUI
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     private function processPostApiCall($data)
     {

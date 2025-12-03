@@ -5,7 +5,7 @@ namespace ai;
 
 use ilObjIxKIUIPluginGUI;
 use objects\Chat;
-use platform\AIChatException;
+use platform\IxKIUIPluginException;
 
 class OpenAI extends LLM
 {
@@ -51,7 +51,7 @@ class OpenAI extends LLM
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function sendChat(Chat $chat)
     {

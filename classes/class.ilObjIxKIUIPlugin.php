@@ -19,8 +19,8 @@ declare(strict_types=1);
  *
  */
 
-use platform\AIChatException;
-use objects\AIChat;
+use platform\IxKIUIPluginException;
+use objects\IxKIUIPlugin;
 
 /**
  * Class ilObjAIChat
@@ -28,16 +28,16 @@ use objects\AIChat;
  */
 class ilObjIxKIUIPlugin extends ilObjectPlugin
 {
-    private AIChat $ai_chat;
+    private IxKIUIPlugin $ai_chat;
 
     /**
      * Creates a new object
      * @param bool $clone_mode
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     protected function doCreate(bool $clone_mode = false): void
     {
-        $this->ai_chat = new AIChat($this->getId());
+        $this->ai_chat = new IxKIUIPlugin($this->getId());
 
         $this->ai_chat->save();
     }
@@ -47,12 +47,12 @@ class ilObjIxKIUIPlugin extends ilObjectPlugin
      */
     protected function doRead(): void
     {
-        $this->ai_chat = new AIChat($this->getId());
+        $this->ai_chat = new IxKIUIPlugin($this->getId());
     }
 
     /**
      * Deletes the object
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     protected function doDelete(): void
     {
@@ -61,7 +61,7 @@ class ilObjIxKIUIPlugin extends ilObjectPlugin
 
     /**
      * Updates the object
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     protected function doUpdate(): void
     {
@@ -73,7 +73,7 @@ class ilObjIxKIUIPlugin extends ilObjectPlugin
         $this->setType(ilIxKIUIPluginPlugin::PLUGIN_ID);
     }
 
-    public function getAIChat(): AIChat
+    public function getAIChat(): IxKIUIPlugin
     {
         return $this->ai_chat;
     }

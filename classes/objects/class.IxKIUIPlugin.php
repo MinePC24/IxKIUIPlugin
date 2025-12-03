@@ -26,15 +26,15 @@ use ai\LLM;
 use ai\OpenAI;
 use ai\Ollama;
 use DateTime;
-use platform\AIChatConfig;
-use platform\AIChatDatabase;
-use platform\AIChatException;
+use platform\IxKIUIPluginConfig;
+use platform\IxKIUIPluginDatabase;
+use platform\IxKIUIPluginException;
 
 /**
  * Class AIChat
  * @authors Jesús Copado, Daniel Cazalla, Saúl Díaz, Juan Aguilar <info@surlabs.es>
  */
-class AIChat
+class IxKIUIPlugin
 {
     private int $id = 0;
     private bool $online = false;
@@ -52,7 +52,7 @@ class AIChat
     private ?LLM $llm = null;
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function __construct(?int $id = null)
     {
@@ -86,7 +86,7 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function getPrompt(bool $strict = false): string
     {
@@ -94,7 +94,7 @@ class AIChat
             return $this->prompt;
         }
 
-        return AIChatConfig::get("prompt");
+        return IxKIUIPluginConfig::get("prompt");
     }
 
     public function setPrompt(string $prompt): void
@@ -103,7 +103,7 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function getDisclaimer(bool $strict = false): string
     {
@@ -111,7 +111,7 @@ class AIChat
             return $this->disclaimer;
         }
 
-        return AIChatConfig::get("disclaimer");
+        return IxKIUIPluginConfig::get("disclaimer");
     }
 
     public function setDisclaimer(string $disclaimer): void
@@ -120,7 +120,7 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function getMaxMemoryMessages(bool $strict = false): int
     {
@@ -128,8 +128,8 @@ class AIChat
             return $this->max_memory_messages;
         }
 
-        if (!empty(AIChatConfig::get("max_memory_messages"))) {
-            return AIChatConfig::get("max_memory_messages");
+        if (!empty(IxKIUIPluginConfig::get("max_memory_messages"))) {
+            return IxKIUIPluginConfig::get("max_memory_messages");
         }
 
         return 100;
@@ -141,7 +141,7 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function getCharactersLimit(bool $strict = false): int
     {
@@ -149,8 +149,8 @@ class AIChat
             return $this->characters_limit;
         }
 
-        if (!empty(AIChatConfig::get("characters_limit"))) {
-            return AIChatConfig::get("characters_limit");
+        if (!empty(IxKIUIPluginConfig::get("characters_limit"))) {
+            return IxKIUIPluginConfig::get("characters_limit");
         }
 
         return 2000;
@@ -162,7 +162,7 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function getOpenaiModel(bool $strict = false): string
     {
@@ -170,7 +170,7 @@ class AIChat
             return $this->openai_model;
         }
 
-        return AIChatConfig::get("openai_model");
+        return IxKIUIPluginConfig::get("openai_model");
     }
 
     public function setOpenaiModel(string $openai_model): void
@@ -179,7 +179,7 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function getOpenaiApiKey(bool $strict = false): string
     {
@@ -187,7 +187,7 @@ class AIChat
             return $this->openai_api_key;
         }
 
-        return AIChatConfig::get("openai_api_key");
+        return IxKIUIPluginConfig::get("openai_api_key");
     }
 
     public function setOpenaiApiKey(string $openai_api_key): void
@@ -196,7 +196,7 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function isOpenaiStreaming(bool $strict = false): bool
     {
@@ -208,7 +208,7 @@ class AIChat
             return $this->openai_streaming;
         }
 
-        return AIChatConfig::get("openai_streaming") == "1";
+        return IxKIUIPluginConfig::get("openai_streaming") == "1";
     }
 
     public function setOpenaiStreaming(bool $openai_streaming): void
@@ -217,7 +217,7 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function getOllamaModel(bool $strict = false): string
     {
@@ -225,7 +225,7 @@ class AIChat
             return $this->ollama_model;
         }
 
-        return AIChatConfig::get("ollama_model");
+        return IxKIUIPluginConfig::get("ollama_model");
     }
 
     public function setOllamaModel(string $ollama_model): void
@@ -234,12 +234,12 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function getOllamaModelsList(): array
     {
-        if (!empty(AIChatConfig::get("ollama_models"))) {
-            return AIChatConfig::get("ollama_models");
+        if (!empty(IxKIUIPluginConfig::get("ollama_models"))) {
+            return IxKIUIPluginConfig::get("ollama_models");
         }
 
         return [];
@@ -247,7 +247,7 @@ class AIChat
 
     public function getServiceToUse(bool $strict = false): string
     {
-        $available_services = AIChatConfig::get("available_services");
+        $available_services = IxKIUIPluginConfig::get("available_services");
 
         if (($this->service_to_use != "" && isset($available_services[$this->service_to_use]) && $available_services[$this->service_to_use]) || $strict) {
             return $this->service_to_use;
@@ -273,7 +273,7 @@ class AIChat
             return $this->gwdg_model;
         }
 
-        return AIChatConfig::get("gwdg_model");
+        return IxKIUIPluginConfig::get("gwdg_model");
     }
 
     public function setGwdgModel(string $gwdg_model): void
@@ -291,7 +291,7 @@ class AIChat
             return $this->gwdg_streaming;
         }
 
-        return AIChatConfig::get("gwdg_streaming") == "1";
+        return IxKIUIPluginConfig::get("gwdg_streaming") == "1";
     }
 
     public function setGwdgStreaming(bool $gwdg_streaming): void
@@ -301,8 +301,8 @@ class AIChat
 
     public function getGwdgModelsList(): array
     {
-        if (!empty(AIChatConfig::get("gwdg_models"))) {
-            return AIChatConfig::get("gwdg_models");
+        if (!empty(IxKIUIPluginConfig::get("gwdg_models"))) {
+            return IxKIUIPluginConfig::get("gwdg_models");
         }
 
         return [];
@@ -319,11 +319,11 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function loadFromDB(): void
     {
-        $database = new AIChatDatabase();
+        $database = new IxKIUIPluginDatabase();
 
         $result = $database->select("xaic_objects", ["id" => $this->getId()]);
 
@@ -344,15 +344,15 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function save(): void
     {
         if (!isset($this->id) || $this->id == 0) {
-            throw new AIChatException("AIChat::save() - AIChat ID is 0");
+            throw new IxKIUIPluginException("AIChat::save() - AIChat ID is 0");
         }
 
-        $database = new AIChatDatabase();
+        $database = new IxKIUIPluginDatabase();
 
         $database->insertOnDuplicatedKey("xaic_objects", array(
             "id" => $this->id,
@@ -372,11 +372,11 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function delete(): void
     {
-        $database = new AIChatDatabase();
+        $database = new IxKIUIPluginDatabase();
 
         $database->delete("xaic_objects", ["id" => $this->id]);
 
@@ -390,11 +390,11 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function getChatsForApi(?int $user_id = null): array
     {
-        $database = new AIChatDatabase();
+        $database = new IxKIUIPluginDatabase();
 
         $where = [
             "obj_id" => $this->getId(),
@@ -423,7 +423,7 @@ class AIChat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     private function loadLLM()
     {
@@ -444,7 +444,7 @@ class AIChat
 
                     if (in_array($model, $models)) {
                         $this->llm = new Ollama($model);
-                        $this->llm->setEndpoint(AIChatConfig::get("ollama_endpoint"));
+                        $this->llm->setEndpoint(IxKIUIPluginConfig::get("ollama_endpoint"));
                         $this->llm->setMaxMemoryMessages($this->getMaxMemoryMessages());
                         $this->llm->setPrompt($this->getPrompt());
                     }
@@ -455,20 +455,20 @@ class AIChat
 
                     if (in_array($model, $models) || array_key_exists($model, $models)) {
                         $this->llm = new GWDG($model);
-                        $this->llm->setApiKey(AIChatConfig::get("gwdg_api_key"));
+                        $this->llm->setApiKey(IxKIUIPluginConfig::get("gwdg_api_key"));
                         $this->llm->setMaxMemoryMessages($this->getMaxMemoryMessages());
                         $this->llm->setPrompt($this->getPrompt());
                         $this->llm->setStreaming($this->isGwdgStreaming());
                     }
                     break;
                 default:
-                    throw new AIChatException("AIChat::loadLLM() - LLM service to use not valid (Service: " . $service_to_use . ")");
+                    throw new IxKIUIPluginException("AIChat::loadLLM() - LLM service to use not valid (Service: " . $service_to_use . ")");
             }
         }
     }
     
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function getLLMResponse(Chat $chat): Message
     {

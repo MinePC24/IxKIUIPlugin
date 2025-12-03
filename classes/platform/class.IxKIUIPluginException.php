@@ -27,7 +27,7 @@ use Exception;
  * Class AIChatException
  * @authors Jesús Copado, Daniel Cazalla, Saúl Díaz, Juan Aguilar <info@surlabs.es>
  */
-class AIChatException extends Exception
+class IxKIUIPluginException extends Exception
 {
     public function __construct($message = "", $code = 0, Exception $previous = null)
     {

@@ -23,8 +23,8 @@ namespace objects;
 
 use DateTime;
 use Exception;
-use platform\AIChatDatabase;
-use platform\AIChatException;
+use platform\IxKIUIPluginDatabase;
+use platform\IxKIUIPluginException;
 
 /**
  * Class Chat
@@ -175,12 +175,12 @@ class Chat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      * @throws Exception
      */
     public function loadFromDB(): void
     {
-        $database = new AIChatDatabase();
+        $database = new IxKIUIPluginDatabase();
 
         $result = $database->select("xaic_chats", ["id" => $this->getId()]);
 
@@ -200,11 +200,11 @@ class Chat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function save(): void
     {
-        $database = new AIChatDatabase();
+        $database = new IxKIUIPluginDatabase();
 
         $data = [
             "obj_id" => $this->getObjId(),
@@ -228,11 +228,11 @@ class Chat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function delete(): void
     {
-        $database = new AIChatDatabase();
+        $database = new IxKIUIPluginDatabase();
 
         $database->delete("xaic_chats", ["id" => $this->getId()]);
 
@@ -242,7 +242,7 @@ class Chat
     }
 
     /**
-     * @throws AIChatException
+     * @throws IxKIUIPluginException
      */
     public function toArray(): array
     {
