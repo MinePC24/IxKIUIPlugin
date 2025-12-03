@@ -73,7 +73,7 @@ class ilObjAIChatGUI extends ilObjectPluginGUI
 
     public function getType(): string
     {
-        return ilAIChatPlugin::PLUGIN_ID;
+        return ilIxKIUIPluginPlugin::PLUGIN_ID;
     }
 
     /**

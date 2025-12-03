@@ -48,7 +48,7 @@ class ilObjAIChatListGUI extends ilObjectPluginListGUI
 
     public function initType()
     {
-        $this->setType(ilAIChatPlugin::PLUGIN_ID);
+        $this->setType(ilIxKIUIPluginPlugin::PLUGIN_ID);
     }
 
     public function getCustomProperties($a_prop): array

@@ -23,7 +23,7 @@ declare(strict_types=1);
  * Class ilAIChatPlugin
  * @authors Jesús Copado, Daniel Cazalla, Saúl Díaz, Juan Aguilar <info@surlabs.es>
  */
-class ilAIChatPlugin extends ilRepositoryObjectPlugin
+class ilIxKIUIPluginPlugin extends ilRepositoryObjectPlugin
 {
     const PLUGIN_ID = 'xaid';
 

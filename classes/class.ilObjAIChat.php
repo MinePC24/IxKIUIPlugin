@@ -70,7 +70,7 @@ class ilObjAIChat extends ilObjectPlugin
 
     protected function initType(): void
     {
-        $this->setType(ilAIChatPlugin::PLUGIN_ID);
+        $this->setType(ilIxKIUIPluginPlugin::PLUGIN_ID);
     }
 
     public function getAIChat(): AIChat
