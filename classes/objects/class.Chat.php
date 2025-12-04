@@ -110,7 +110,7 @@ class Chat
     {
         if ($title === null) {
             global $DIC;
-            $title = $DIC->language()->txt("rep_robj_xaic_chat_default_title");
+            $title = $DIC->language()->txt("rep_robj_xaid_chat_default_title");
         }
         
         $this->title = $title;
@@ -182,7 +182,7 @@ class Chat
     {
         $database = new IxKIUIPluginDatabase();
 
-        $result = $database->select("xaic_chats", ["id" => $this->getId()]);
+        $result = $database->select("xaid_chats", ["id" => $this->getId()]);
 
         if (isset($result[0])) {
             $this->setObjId((int)$result[0]["obj_id"]);
@@ -192,7 +192,7 @@ class Chat
             $this->setLastUpdate(new DateTime($result[0]["last_update"]));
         }
 
-        $messages = $database->select("xaic_messages", ["chat_id" => $this->getId()], ["id"], "ORDER BY date ASC");
+        $messages = $database->select("xaid_messages", ["chat_id" => $this->getId()], ["id"], "ORDER BY date ASC");
 
         foreach ($messages as $message) {
             $this->addMessage(new Message((int)$message["id"]));
@@ -215,15 +215,15 @@ class Chat
         ];
 
         if ($this->getId() > 0) {
-            $database->update("xaic_chats", $data, ["id" => $this->getId()]);
+            $database->update("xaid_chats", $data, ["id" => $this->getId()]);
         } else {
-            $id = $database->nextId("xaic_chats");
+            $id = $database->nextId("xaid_chats");
 
             $this->setId($id);
 
             $data["id"] = $id;
 
-            $database->insert("xaic_chats", $data);
+            $database->insert("xaid_chats", $data);
         }
     }
 
@@ -234,7 +234,7 @@ class Chat
     {
         $database = new IxKIUIPluginDatabase();
 
-        $database->delete("xaic_chats", ["id" => $this->getId()]);
+        $database->delete("xaid_chats", ["id" => $this->getId()]);
 
         foreach ($this->messages as $message) {
             $message->delete();

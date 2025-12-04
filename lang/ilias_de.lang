@@ -1,15 +1,15 @@
-obj_xaic#:#KI-Chat_dev
-objs_xaic#:#KI-Chat-Objekte_dev
-xaic_new#:#Neuer KI-Chat
-xaic_add#:#Add KI-Chat
-xaic_delete#:#Löschen KI-Chat
-xaic_edit#:#Bearbeiten
-xaic_edit_permission#:#Bearbeiten von Berechtigungen
-xaic_read#: #Lesen (nur im nicht-anonymen Modus verwendet)
-xaic_copy#:#AIChat kopieren
-xaic_visible#:#AIChats sichtbar
-xaic_write#:#KI-Chat präsentieren und bearbeiten
-objs_xaic_duplicate#:#KI-Chat-Objekt duplizieren
+obj_xaid#:#KI-Chat_dev
+objs_xaid#:#KI-Chat-Objekte_dev
+xaid_new#:#Neuer KI-Chat
+xaid_add#:#Add KI-Chat
+xaid_delete#:#Löschen KI-Chat
+xaid_edit#:#Bearbeiten
+xaid_edit_permission#:#Bearbeiten von Berechtigungen
+xaid_read#: #Lesen (nur im nicht-anonymen Modus verwendet)
+xaid_copy#:#AIChat kopieren
+xaid_visible#:#AIChats sichtbar
+xaid_write#:#KI-Chat präsentieren und bearbeiten
+objs_xaid_duplicate#:#KI-Chat-Objekt duplizieren
 object_content#:#Inhalt
 object_test#:#Test
 object_settings#:#Einstellungen

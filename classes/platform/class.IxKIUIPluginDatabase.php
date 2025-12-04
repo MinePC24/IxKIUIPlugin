@@ -31,10 +31,10 @@ use ilDBInterface;
 class IxKIUIPluginDatabase
 {
     const ALLOWED_TABLES = [
-        'xaic_config',
-        'xaic_objects',
-        'xaic_chats',
-        'xaic_messages'
+        'xaid_config',
+        'xaid_objects',
+        'xaid_chats',
+        'xaid_messages'
     ];
 
     private ilDBInterface $db;

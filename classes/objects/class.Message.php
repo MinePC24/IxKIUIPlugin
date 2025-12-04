@@ -126,7 +126,7 @@ class Message
     {
         $database = new IxKIUIPluginDatabase();
 
-        $result = $database->select("xaic_messages", ["id" => $this->getId()]);
+        $result = $database->select("xaid_messages", ["id" => $this->getId()]);
 
         if (isset($result[0])) {
             $this->setChatId((int)$result[0]["chat_id"]);
@@ -151,15 +151,15 @@ class Message
         ];
 
         if ($this->getId() > 0) {
-            $database->update("xaic_messages", $data, ["id" => $this->getId()]);
+            $database->update("xaid_messages", $data, ["id" => $this->getId()]);
         } else {
-            $id = $database->nextId("xaic_messages");
+            $id = $database->nextId("xaid_messages");
 
             $this->setId($id);
 
             $data["id"] = $id;
 
-            $database->insert("xaic_messages", $data);
+            $database->insert("xaid_messages", $data);
         }
     }
 
@@ -170,7 +170,7 @@ class Message
     {
         $database = new IxKIUIPluginDatabase();
 
-        $database->delete("xaic_messages", ["id" => $this->getId()]);
+        $database->delete("xaid_messages", ["id" => $this->getId()]);
     }
 
     public function toArray(): array

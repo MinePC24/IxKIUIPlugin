@@ -59,14 +59,14 @@ class Ollama extends LLM
         curl_close($curlSession);
 
         if ($errNo) {
-            ilObjIxKIUIPluginGUI::sendApiResponse(array("error" => $DIC->language()->txt("rep_robj_xaic_error_http") . ": " . $errMsg), 500);
+            ilObjIxKIUIPluginGUI::sendApiResponse(array("error" => $DIC->language()->txt("rep_robj_xaid_error_http") . ": " . $errMsg), 500);
         }
 
         if ($httpcode != 200) {
             if ($httpcode === 401) {
-                ilObjIxKIUIPluginGUI::sendApiResponse(array("error" => $DIC->language()->txt("rep_robj_xaic_error_apikey")), 401);
+                ilObjIxKIUIPluginGUI::sendApiResponse(array("error" => $DIC->language()->txt("rep_robj_xaid_error_apikey")), 401);
             } else {
-                ilObjIxKIUIPluginGUI::sendApiResponse(array("error" => $DIC->language()->txt("rep_robj_xaic_error_http")), $httpcode);
+                ilObjIxKIUIPluginGUI::sendApiResponse(array("error" => $DIC->language()->txt("rep_robj_xaid_error_http")), $httpcode);
             }
         }
 

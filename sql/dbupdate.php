@@ -3,7 +3,7 @@
 global $DIC;
 $db = $DIC->database();
 
-if (!$db->tableExists('xaic_config')) {
+if (!$db->tableExists('xaid_config')) {
     $fields = [
         'name' => [
             'type' => 'text',
@@ -17,11 +17,11 @@ if (!$db->tableExists('xaic_config')) {
         ]
     ];
 
-    $db->createTable('xaic_config', $fields);
-    $db->addPrimaryKey('xaic_config', ['name']);
+    $db->createTable('xaid_config', $fields);
+    $db->addPrimaryKey('xaid_config', ['name']);
 }
 
-if (!$db->tableExists('xaic_objects')) {
+if (!$db->tableExists('xaid_objects')) {
     $fields = [
         'id' => [
             'type' => 'integer',
@@ -45,11 +45,11 @@ if (!$db->tableExists('xaic_objects')) {
         ]
     ];
 
-    $db->createTable('xaic_objects', $fields);
-    $db->addPrimaryKey('xaic_objects', ['id']);
+    $db->createTable('xaid_objects', $fields);
+    $db->addPrimaryKey('xaid_objects', ['id']);
 }
 
-if (!$db->tableExists('xaic_chats')) {
+if (!$db->tableExists('xaid_chats')) {
     $fields = [
         'id' => [
             'type' => 'integer',
@@ -81,13 +81,13 @@ if (!$db->tableExists('xaic_chats')) {
         ],
     ];
 
-    $db->createTable('xaic_chats', $fields);
-    $db->addPrimaryKey('xaic_chats', ['id']);
-    $db->addIndex('xaic_chats', ['obj_id'], 'i_1');
-    $db->createSequence('xaic_chats');
+    $db->createTable('xaid_chats', $fields);
+    $db->addPrimaryKey('xaid_chats', ['id']);
+    $db->addIndex('xaid_chats', ['obj_id'], 'i_1');
+    $db->createSequence('xaid_chats');
 }
 
-if (!$db->tableExists('xaic_messages')) {
+if (!$db->tableExists('xaid_messages')) {
     $fields = [
         'id' => [
             'type' => 'integer',
@@ -115,24 +115,24 @@ if (!$db->tableExists('xaic_messages')) {
         ]
     ];
 
-    $db->createTable('xaic_messages', $fields);
-    $db->addPrimaryKey('xaic_messages', ['id']);
-    $db->addIndex('xaic_messages', ['chat_id'], 'i_2');
-    $db->createSequence('xaic_messages');
+    $db->createTable('xaid_messages', $fields);
+    $db->addPrimaryKey('xaid_messages', ['id']);
+    $db->addIndex('xaid_messages', ['chat_id'], 'i_2');
+    $db->createSequence('xaid_messages');
 }
 ?>
 <#2>
 <?php
 global $DIC;
 $db = $DIC->database();
-if ($db->tableExists('xaic_config')) {
+if ($db->tableExists('xaid_config')) {
 
-    $result = $db->query("SELECT value FROM xaic_config WHERE name = 'llm_model'");
+    $result = $db->query("SELECT value FROM xaid_config WHERE name = 'llm_model'");
 
     while ($row = $db->fetchAssoc($result)) {
         $model = str_replace('openai_', '', $row['value']);
 
-        $db->manipulate("UPDATE xaic_config SET value = '$model' WHERE name = 'llm_model'");
+        $db->manipulate("UPDATE xaid_config SET value = '$model' WHERE name = 'llm_model'");
     }
 }
 ?>
@@ -140,57 +140,57 @@ if ($db->tableExists('xaic_config')) {
 <?php
 global $DIC;
 $db = $DIC->database();
-if ($db->tableExists('xaic_objects')) {
-    if (!$db->tableColumnExists('xaic_objects', 'provider')) {
-        $db->addTableColumn('xaic_objects', 'provider', [
+if ($db->tableExists('xaid_objects')) {
+    if (!$db->tableColumnExists('xaid_objects', 'provider')) {
+        $db->addTableColumn('xaid_objects', 'provider', [
             'type' => 'text',
             'length' => 250,
             'notnull' => false
         ]);
     }
 
-    if (!$db->tableColumnExists('xaic_objects', 'model')) {
-        $db->addTableColumn('xaic_objects', 'model', [
+    if (!$db->tableColumnExists('xaid_objects', 'model')) {
+        $db->addTableColumn('xaid_objects', 'model', [
             'type' => 'text',
             'length' => 250,
             'notnull' => false
         ]);
     }
 
-    if (!$db->tableColumnExists('xaic_objects', 'streaming')) {
-        $db->addTableColumn('xaic_objects', 'streaming', [
+    if (!$db->tableColumnExists('xaid_objects', 'streaming')) {
+        $db->addTableColumn('xaid_objects', 'streaming', [
             'type' => 'integer',
             'length' => 4,
             'notnull' => false
         ]);
     }
 
-    if (!$db->tableColumnExists('xaic_objects', 'url')) {
-        $db->addTableColumn('xaic_objects', 'url', [
+    if (!$db->tableColumnExists('xaid_objects', 'url')) {
+        $db->addTableColumn('xaid_objects', 'url', [
             'type' => 'text',
             'length' => 250,
             'notnull' => false
         ]);
     }
 
-    if (!$db->tableColumnExists('xaic_objects', 'prompt')) {
-        $db->addTableColumn('xaic_objects', 'prompt', [
+    if (!$db->tableColumnExists('xaid_objects', 'prompt')) {
+        $db->addTableColumn('xaid_objects', 'prompt', [
             'type' => 'text',
             'length' => 4000,
             'notnull' => false
         ]);
     }
 
-    if (!$db->tableColumnExists('xaic_objects', 'char_limit')) {
-        $db->addTableColumn('xaic_objects', 'char_limit', [
+    if (!$db->tableColumnExists('xaid_objects', 'char_limit')) {
+        $db->addTableColumn('xaid_objects', 'char_limit', [
             'type' => 'integer',
             'length' => 4,
             'notnull' => false
         ]);
     }
 
-    if (!$db->tableColumnExists('xaic_objects', 'max_memory_messages')) {
-        $db->addTableColumn('xaic_objects', 'max_memory_messages', [
+    if (!$db->tableColumnExists('xaid_objects', 'max_memory_messages')) {
+        $db->addTableColumn('xaid_objects', 'max_memory_messages', [
             'type' => 'integer',
             'length' => 4,
             'notnull' => false
@@ -202,11 +202,11 @@ if ($db->tableExists('xaic_objects')) {
 <?php
 global $DIC;
 $db = $DIC->database();
-if ($db->tableExists('xaic_config')) {
+if ($db->tableExists('xaid_config')) {
     $config = [];
     $new_config = [];
 
-    $result = $db->query("SELECT * FROM xaic_config");
+    $result = $db->query("SELECT * FROM xaid_config");
 
     while ($row = $db->fetchAssoc($result)) {
         $config[$row['name']] = $row['value'];
@@ -259,19 +259,19 @@ if ($db->tableExists('xaic_config')) {
         $new_config['characters_limit'] = $config['characters_limit'];
     }
 
-    $db->manipulate("DELETE FROM xaic_config");
+    $db->manipulate("DELETE FROM xaid_config");
     foreach ($new_config as $name => $value) {
-        $db->insert('xaic_config', [
+        $db->insert('xaid_config', [
             'name' => ["text", $name],
             'value' => ["text", $value]
         ]);
     }
 }
-if ($db->tableExists('xaic_objects')) {
+if ($db->tableExists('xaid_objects')) {
     $objects = [];
     $objects_updated = [];
 
-    $result = $db->query("SELECT * FROM xaic_objects");
+    $result = $db->query("SELECT * FROM xaid_objects");
 
     while ($row = $db->fetchAssoc($result)) {
         $objects[] = $row;
@@ -298,7 +298,7 @@ if ($db->tableExists('xaic_objects')) {
         $objects_updated[] = $new_object;
     }
 
-    $db->createTable('xaic_objects', array(
+    $db->createTable('xaid_objects', array(
         'id' => [
             'type' => 'integer',
             'length' => 8,
@@ -351,19 +351,19 @@ if ($db->tableExists('xaic_objects')) {
         ]
     ), true);
 
-    $db->addPrimaryKey('xaic_objects', ['id']);
+    $db->addPrimaryKey('xaid_objects', ['id']);
 
     foreach ($objects_updated as $object) {
-        $db->insert('xaic_objects', $object);
+        $db->insert('xaid_objects', $object);
     }
 
-    $db->modifyTableColumn('xaic_chats', 'title', [
+    $db->modifyTableColumn('xaid_chats', 'title', [
         'type' => 'blob',
         'length' => 250,
         'notnull' => true
     ]);
 
-    $db->modifyTableColumn('xaic_messages', 'message', [
+    $db->modifyTableColumn('xaid_messages', 'message', [
         'type' => 'blob',
         'length' => 4000,
         'notnull' => true
@@ -378,16 +378,16 @@ $db = $DIC->database();
 
 $service_to_use = '';
 
-if ($db->tableExists('xaic_config')) {
-    $result = $db->query("SELECT value FROM xaic_config WHERE name = 'service_to_use'");
+if ($db->tableExists('xaid_config')) {
+    $result = $db->query("SELECT value FROM xaid_config WHERE name = 'service_to_use'");
 
     while ($row = $db->fetchAssoc($result)) {
         $service_to_use = $row['value'];
     }
 
-    $db->manipulate("DELETE FROM xaic_config WHERE name = 'service_to_use'");
+    $db->manipulate("DELETE FROM xaid_config WHERE name = 'service_to_use'");
 
-    $result_available_services = $db->query("SELECT value FROM xaic_config WHERE name = 'available_services'");
+    $result_available_services = $db->query("SELECT value FROM xaid_config WHERE name = 'available_services'");
 
     $services = [];
 
@@ -405,7 +405,7 @@ if ($db->tableExists('xaic_config')) {
             $services[$service_to_use] = true;
         }
 
-        $db->insert('xaic_config', [
+        $db->insert('xaid_config', [
             'name' => ["text", 'available_services'],
             'value' => ["text", json_encode($services)]
         ]);
@@ -414,18 +414,18 @@ if ($db->tableExists('xaic_config')) {
             $services[$service_to_use] = true;
         }
 
-        $db->manipulate("UPDATE xaic_config SET value = '" . json_encode($services) . "' WHERE name = 'available_services'");
+        $db->manipulate("UPDATE xaid_config SET value = '" . json_encode($services) . "' WHERE name = 'available_services'");
     }
 }
 
-if ($db->tableExists('xaic_objects') && !$db->tableColumnExists('xaic_objects', 'service_to_use')) {
-    $db->addTableColumn('xaic_objects', 'service_to_use', [
+if ($db->tableExists('xaid_objects') && !$db->tableColumnExists('xaid_objects', 'service_to_use')) {
+    $db->addTableColumn('xaid_objects', 'service_to_use', [
         'type' => 'text',
         'length' => 250,
         'notnull' => false
     ]);
 
-    $db->manipulate("UPDATE xaic_objects SET service_to_use = '$service_to_use'");
+    $db->manipulate("UPDATE xaid_objects SET service_to_use = '$service_to_use'");
 }
 ?>
 <#6>
@@ -434,17 +434,17 @@ global $DIC;
 
 $db = $DIC->database();
 
-if ($db->tableExists('xaic_objects')) {
-    if (!$db->tableColumnExists('xaic_objects', 'gwdg_model')) {
-        $db->addTableColumn('xaic_objects', 'gwdg_model', [
+if ($db->tableExists('xaid_objects')) {
+    if (!$db->tableColumnExists('xaid_objects', 'gwdg_model')) {
+        $db->addTableColumn('xaid_objects', 'gwdg_model', [
             'type' => 'text',
             'length' => 250,
             'notnull' => false
         ]);
     }
 
-    if (!$db->tableColumnExists('xaic_objects', 'gwdg_streaming')) {
-        $db->addTableColumn('xaic_objects', 'gwdg_streaming', [
+    if (!$db->tableColumnExists('xaid_objects', 'gwdg_streaming')) {
+        $db->addTableColumn('xaid_objects', 'gwdg_streaming', [
             'type' => 'integer',
             'length' => 4,
             'notnull' => false

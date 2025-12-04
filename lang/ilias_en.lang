@@ -1,15 +1,15 @@
-obj_xaic#:#AI Chat_dev
-objs_xaic#:#AI Chat Objects_dev
-xaic_new#:#New AI Chat
-xaic_add#:#Add AI Chat
-xaic_delete#:#Delete AIChat
-xaic_edit#:#Edit
-xaic_edit_permission#:#Edit Permissions
-xaic_read#:#Read (used only in non-anonymous-mode)
-xaic_copy#:#Copy AIChat
-xaic_visible#:#AIChats visible
-xaic_write#:#Present and edit AIChat
-objs_xaic_duplicate#:#Duplicate AI Chat Object
+obj_xaid#:#AI Chat_dev
+objs_xaid#:#AI Chat Objects_dev
+xaid_new#:#New AI Chat
+xaid_add#:#Add AI Chat
+xaid_delete#:#Delete AIChat
+xaid_edit#:#Edit
+xaid_edit_permission#:#Edit Permissions
+xaid_read#:#Read (used only in non-anonymous-mode)
+xaid_copy#:#Copy AIChat
+xaid_visible#:#AIChats visible
+xaid_write#:#Present and edit AIChat
+objs_xaid_duplicate#:#Duplicate AI Chat Object
 object_content#:#Content
 object_test#:#Test
 object_settings#:#Settings

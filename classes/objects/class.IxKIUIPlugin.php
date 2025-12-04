@@ -325,7 +325,7 @@ class IxKIUIPlugin
     {
         $database = new IxKIUIPluginDatabase();
 
-        $result = $database->select("xaic_objects", ["id" => $this->getId()]);
+        $result = $database->select("xaid_objects", ["id" => $this->getId()]);
 
         if (isset($result[0])) {
             $this->setOnline((bool) $result[0]["online"]);
@@ -354,7 +354,7 @@ class IxKIUIPlugin
 
         $database = new IxKIUIPluginDatabase();
 
-        $database->insertOnDuplicatedKey("xaic_objects", array(
+        $database->insertOnDuplicatedKey("xaid_objects", array(
             "id" => $this->id,
             "online" => (int) $this->online,
             "prompt" => $this->prompt,
@@ -378,9 +378,9 @@ class IxKIUIPlugin
     {
         $database = new IxKIUIPluginDatabase();
 
-        $database->delete("xaic_objects", ["id" => $this->id]);
+        $database->delete("xaid_objects", ["id" => $this->id]);
 
-        $chats = $database->select("xaic_chats", ["obj_id" => $this->id]);
+        $chats = $database->select("xaid_chats", ["obj_id" => $this->id]);
 
         foreach ($chats as $chat) {
             $chat_obj = new Chat($chat["id"]);
@@ -404,7 +404,7 @@ class IxKIUIPlugin
             $where["user_id"] = $user_id;
         }
 
-        $chats = $database->select("xaic_chats", $where, null, "ORDER BY last_update DESC");
+        $chats = $database->select("xaid_chats", $where, null, "ORDER BY last_update DESC");
 
         if (empty($chats) && isset($user_id) && $user_id > 0) {
             $chat = new Chat();

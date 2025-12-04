@@ -38,7 +38,7 @@ class IxKIUIPluginConfig
      */
     public static function load(): void
     {
-        $config = (new IxKIUIPluginDatabase)->select('xaic_config');
+        $config = (new IxKIUIPluginDatabase)->select('xaid_config');
 
         foreach ($config as $row) {
             if (isset($row['value']) && $row['value'] !== '') {
@@ -90,7 +90,7 @@ class IxKIUIPluginConfig
      */
     public static function getFromDB(string $key)
     {
-        $config = (new IxKIUIPluginDatabase)->select('xaic_config', array(
+        $config = (new IxKIUIPluginDatabase)->select('xaid_config', array(
             'name' => $key
         ));
 
@@ -138,7 +138,7 @@ class IxKIUIPluginConfig
                     }
 
                     try {
-                        (new IxKIUIPluginDatabase)->insertOnDuplicatedKey('xaic_config', $data);
+                        (new IxKIUIPluginDatabase)->insertOnDuplicatedKey('xaid_config', $data);
 
                         self::$updated[$key] = false;
                     } catch (IxKIUIPluginException $e) {
