@@ -27,7 +27,7 @@ class ilObjIxKIUIPluginListGUI extends ilObjectPluginListGUI
 {
     public function getGuiClass(): string
     {
-        return 'ilObjAIChatGUI';
+        return 'ilObjIxKIUIPluginGUI';
     }
 
     public function initCommands(): array

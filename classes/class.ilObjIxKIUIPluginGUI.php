@@ -123,10 +123,10 @@ class ilObjIxKIUIPluginGUI extends ilObjectPluginGUI
         }
 
         $tpl = $DIC['tpl'];
-        $tpl->addCss("Customizing/global/plugins/Services/Repository/RepositoryObject/AIChat/templates/default/index.css");
-        $tpl->addJavascript("/Customizing/global/plugins/Services/Repository/RepositoryObject/AIChat/templates/default/index.js");
+        $tpl->addCss("Customizing/global/plugins/Services/Repository/RepositoryObject/IxKIUIPlugin/templates/default/index.css");
+        $tpl->addJavascript("/Customizing/global/plugins/Services/Repository/RepositoryObject/IxKIUIPlugin/templates/default/index.js");
 
-        $apiUrl = $this->ctrl->getLinkTargetByClass("ilObjAIChatGUI", "apiCall");
+        $apiUrl = $this->ctrl->getLinkTargetByClass("ilObjIxKIUIPluginGUI", "apiCall");
 
         $this->tpl->setContent("<div id='root' apiurl='$apiUrl'></div>");
     }
@@ -155,7 +155,7 @@ class ilObjIxKIUIPluginGUI extends ilObjectPluginGUI
 
         $this->tabs->activateTab("settings");
 
-        $form_action = $this->ctrl->getLinkTargetByClass("ilObjAIChatGUI", "settings");
+        $form_action = $this->ctrl->getLinkTargetByClass("ilObjIxKIUIPluginGUI", "settings");
         $this->tpl->setContent($this->renderSettingsForm($form_action));
     }
 

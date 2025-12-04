@@ -61,8 +61,8 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
             case "configureGWDG":
                 IxKIUIPluginConfig::load();
                 $this->initTabs();
-                $this->control->setParameterByClass('ilAIChatConfigGUI', 'cmd', $cmd);
-                $form_action = $this->control->getLinkTargetByClass("ilAIChatConfigGUI", $cmd);
+                $this->control->setParameterByClass('ilIxKIUIPluginConfigGUI', 'cmd', $cmd);
+                $form_action = $this->control->getLinkTargetByClass("ilIxKIUIPluginConfigGUI", $cmd);
                 $rendered = $this->renderForm($form_action, $this->buildForm($cmd));
                 break;
             default:
@@ -77,25 +77,25 @@ class ilIxKIUIPluginConfigGUI extends ilPluginConfigGUI
         $this->tabs->addTab(
             "general",
             $this->plugin_object->txt("config_general"),
-            $this->control->getLinkTargetByClass("ilAIChatConfigGUI", "configureGeneral")
+            $this->control->getLinkTargetByClass("ilIxKIUIPluginConfigGUI", "configureGeneral")
         );
 
         $this->tabs->addTab(
             "openai",
             $this->plugin_object->txt("config_openai"),
-            $this->control->getLinkTargetByClass("ilAIChatConfigGUI", "configureOpenAI")
+            $this->control->getLinkTargetByClass("ilIxKIUIPluginConfigGUI", "configureOpenAI")
         );
 
         $this->tabs->addTab(
             "ollama",
             $this->plugin_object->txt("config_ollama"),
-            $this->control->getLinkTargetByClass("ilAIChatConfigGUI", "configureOllama")
+            $this->control->getLinkTargetByClass("ilIxKIUIPluginConfigGUI", "configureOllama")
         );
 
         $this->tabs->addTab(
             "gwdg",
             "GWDG",
-            $this->control->getLinkTargetByClass("ilAIChatConfigGUI", "configureGWDG")
+            $this->control->getLinkTargetByClass("ilIxKIUIPluginConfigGUI", "configureGWDG")
         );
 
         switch($this->control->getCmd()) {
